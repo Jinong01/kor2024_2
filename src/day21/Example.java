@@ -5,5 +5,6 @@ public class Example { //dawdad
         //wmdkamwd
         int a = 100;
         int b = 2312;
+        int c = 1000;
     }
 }
