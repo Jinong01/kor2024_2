@@ -40,8 +40,17 @@ public class BoardService1 {
                 }
 
             } // if end
-            if ( choose == 2) { // 만약에 입력한 값이 2이면 게시물 출력 구현
+            else if ( choose == 2) { // 만약에 입력한 값이 2이면 게시물 출력 구현
 
+                if (content1 != null) {// 만약에 첫번째 게시물이 존자하면
+                    System.out.printf("작성자 : %s, 내용 : %s\n", writer1, content1);
+                }
+                if (content2 != null) {// 만약에 두번째 게시물이 존자하면
+                    System.out.printf("작성자 : %s, 내용 : %s\n", writer2, content2);
+                }
+                if (content3 != null) {// 만약에 세번째 게시물이 존자하면
+                    System.out.printf("작성자 : %s, 내용 : %s\n", writer3, content3);
+                }
             } // if end
         } // while end
 
