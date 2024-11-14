@@ -1,6 +1,6 @@
-package day22;
+package day23;
 
-public class NewBoard {
+public class Board {
     /*
        public : 공개용
        private : 비공개용, 다른 클래스에서 접근을 차단하는 키워드
@@ -19,27 +19,29 @@ public class NewBoard {
     // 2. 생성자 : 객체 생성시 new 뒤로 오는 함수
     // 생성자는 매개변수(함수안으로 들어오는 값을 저장하는 변수)가 있지만 반환값(함수가 종료될때 반환값)이 없다
     // 오버로딩 : 동일한 함수명/생성자명으로 선언은 불가능 하지만 매개변수의 타입,개수,순서에 따라 식별 가능한 함수를 선언하는 방법
-    NewBoard() {
+    Board() {
     }
 
-    NewBoard(String content) {
+    Board(String content) {
         this.content = content;
     }
 
-    NewBoard(String content, String writer) {
+    Board(String content, String writer) {
         this.content = content;
         this.writer = writer;
     }
 
-    NewBoard(String content, String writer, int pwd) {
+    Board(String content, String writer, int pwd) {
         this.content = content;
         this.writer = writer;
         this.pwd = pwd;
     }
 
     //3. 메소드
+    // getter 함수(필드값 호출함수) : private 선언된 필드를 public 함수로 외부 클래스부터 간접접근 허용한다.
+    // setter 함수(필드값 저장함수) : private 선언된 필드를 public 함수로 외부 클래스부터 간전접근 허용
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     public void setContent(String content) {
@@ -62,8 +64,10 @@ public class NewBoard {
         this.pwd = pwd;
     }
 
-    @Override
+    @Override // 재정의
     public String toString() {
         return "작성자 : " + writer + " 내용 : " + content + " 비밀번호 : " + pwd + "\n";
     }
+
+
 }
