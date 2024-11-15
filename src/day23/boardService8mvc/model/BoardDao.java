@@ -1,8 +1,15 @@
 package day23.boardService8mvc.model;
 
+
+
 import java.util.ArrayList;
 
 public class BoardDao {
+    private static BoardDao boardDao = new BoardDao();
+    private BoardDao(){}
+    public static BoardDao getInstance(){
+        return boardDao;
+    }
 
     ArrayList<BoardDto> boardDB = new ArrayList<>();
 
@@ -13,8 +20,8 @@ public class BoardDao {
     }
 
     // 2. 게시물 출력 접근 함수
-    public void boardPrint(){
+    public ArrayList<BoardDto> boardPrint(){
 
+        return boardDB;
     }
-
 }

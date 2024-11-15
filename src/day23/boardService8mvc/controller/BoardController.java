@@ -1,9 +1,17 @@
 package day23.boardService8mvc.controller;
 
+import day23.Board;
 import day23.boardService8mvc.model.BoardDao;
 import day23.boardService8mvc.model.BoardDto;
 
+import java.util.ArrayList;
+
 public class BoardController {
+    private static BoardController boardController = new BoardController();
+    private BoardController(){}
+    public static BoardController getInstance(){
+        return boardController;
+    }
 
     // 1. 게시물 등록 제어 함수
     public boolean boardWrite(String content, String writer, int pwd) {
@@ -14,12 +22,21 @@ public class BoardController {
         BoardDto boardDto = new BoardDto(content, writer, pwd);
 
         // 3. 입력받은 객체를 저장하기 위해 Dao 전달하고 결과를 응답 받기
-        BoardDao boardDao = new BoardDao();
-        return boardDao.boardWrite(boardDto);
+
+        return BoardDao.getInstance().boardWrite(boardDto);
     }
 
     // 2. 게시물 출력 제어 함수
-    public void boardPrint() {
+    public ArrayList<BoardDto> boardPrint() {
+        // void : 메소드 호출시 반환되는 값이 없다는 뜻을 가진 키워드
+        // - void 대신 여러개의 게시물 반환받고 싶다.
+        // void --> ArrayList<Board>
+        // * dao 에게 게시물 전체출력 함수를 호출해서 결과를 받는다.
+        // 1. dao 에게 게시물 전체출력 함수를 호출하기 위해 객체 생성
 
+        // 2. 메소드 호출
+        ArrayList<BoardDto> result = BoardDao.getInstance().boardPrint();
+        // 3. dao 에게 응답받은 결과를 view 응답하기
+        return result; // return - 메소드가 종료되면서 반환되는 값
     }
 }
