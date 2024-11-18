@@ -1,6 +1,7 @@
 package day23.boardService8mvc;
 
 import day23.boardService8mvc.view.BoardView;
+import day23.boardService8mvc.view.UserView;
 
 public class AppStart {
     public static void main(String[] args) {
@@ -15,6 +16,6 @@ public class AppStart {
          */
 
         // 싱글톤 사용한 후
-        BoardView.getInstance().mainPage();
+        UserView.getInstance().mainPage();
     }
 }
