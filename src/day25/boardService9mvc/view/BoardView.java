@@ -1,8 +1,7 @@
-package day23.boardService8mvc.view;
+package day25.boardService9mvc.view;
 
-import day23.Board;
-import day23.boardService8mvc.controller.BoardController;
-import day23.boardService8mvc.model.BoardDto;
+import day25.boardService9mvc.controller.BoardController;
+import day25.boardService9mvc.model.BoardDto;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,7 +32,6 @@ public class BoardView {
             else if ( choose == 2 ) {
                 boardPrint();
             }
-
         }
     }
 
@@ -55,7 +53,6 @@ public class BoardView {
         } else {
             System.out.println("게시물 등록 실패");
         }
-
     }
 
     // 2. 게시물 출력 함수
@@ -68,7 +65,7 @@ public class BoardView {
         ArrayList<BoardDto> result = BoardController.getInstance().boardPrint(); // 게시물출력 함수를 호출해서
 
         for (int index = 0; index <= result.size()-1; index++) {
-            System.out.println("게시물내용 : " + result.get(index).getContent());
+            System.out.print("게시물내용 : " + result.get(index).getContent());
             System.out.println("게시물작성자 : " + result.get(index).getWriter());
         }
     }
