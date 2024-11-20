@@ -1,0 +1,6 @@
+qwe,qwe,true
+qwe,qwe,true
+qwe,qwe,true
+qwe,qwe,true
+ㅂㅈㄷ,ㅂㅈㄷ,true
+qwe,qwe,false
