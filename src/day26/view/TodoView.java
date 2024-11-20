@@ -55,7 +55,7 @@ public class TodoView {
     public void todoPrint() {
         TodoController.getInstance().todoPrint();
         for (int index = 0; index <= TodoDao.getInstance().todoDb.size()-1; index++){
-            System.out.printf("할일 : %s , 마감기한 : %s , 수행여부 : %b\n",
+            System.out.printf(index+"."+"할일 : %s , 마감기한 : %s , 수행여부 : %b\n",
                     TodoDao.getInstance().todoDb.get(index).getTodo(),
                     TodoDao.getInstance().todoDb.get(index).getTodoDate(),
                     TodoDao.getInstance().todoDb.get(index).isComplete());
@@ -63,7 +63,7 @@ public class TodoView {
     }
 
     public void todoChange(){
-        System.out.println("할일 선택"); int ch = scan.nextInt();
+        System.out.println("수행여부 바꿀 TODO 선택"); int ch = scan.nextInt();
         TodoController.getInstance().todoChange(ch);
     }
 }

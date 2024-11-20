@@ -23,6 +23,10 @@ public class TodoDao {
         fileSave();
     }
 
+    public boolean todoChange(int ch){
+        return todoDb.get(ch).complete;
+    }
+
     public List<TodoDto> todoPrint(){
         return todoDb;
     }
