@@ -27,10 +27,6 @@ public class TodoDao {
         return todoDb;
     }
 
-    public boolean todoChange(int ch){
-        return todoDb.get(ch).isComplete();
-    }
-
     public void fileSave() {
         String outStr = "";
         for (int index = 0; index <= todoDb.size() - 1; index++) {

@@ -8,7 +8,17 @@ import java.util.LinkedHashMap;
 
 public class BoardDao {
     private static BoardDao boardDao = new BoardDao();
-    private BoardDao(){}
+    private BoardDao(){
+
+        // 만약에 파일을 로드하는데 파일이 존재하지 않으면, 만들기
+        File file = new File("./src/day25/boardService9mvc/data.txt");
+        if (!file.exists()){fileLoad();}
+        else {try {
+            file.createNewFile();}
+        catch (IOException e){e.printStackTrace();}}
+        // - 싱글톤(static)이 생성될 때 = 프로그램이 실행될 때
+        //fileLoad();
+    }
     public static BoardDao getInstance(){
         return boardDao;
     }
@@ -45,31 +55,31 @@ public class BoardDao {
 
     // 2. 게시물 출력 접근 함수
     public ArrayList<BoardDto> boardPrint(){
-        fileLoad();
         return boardDB;
     }
 
     // ================= 영구저장을 위한 게시물들을 파일에 저장하는 기능 ================//
     public void fileSave(){ // 게시물 등록을 성공했을 때 호출
-        String outstr = ""; // 임의의 문자열 선언
+        String outStr = ""; // 임의의 문자열 선언
         for (int index = 0; index <= boardDB.size()-1; index++){
             BoardDto boardDto = boardDB.get(index);
-            outstr += boardDto.getContent()+","+boardDto.getWriter()+","+boardDto.getPwd()+"\n";
+            outStr += boardDto.getContent()+","+boardDto.getWriter()+","+boardDto.getPwd();
             // += 복합대입연산자 : 오른쪽 값을 왼쪽 변수값과 더한 후에 결과를 왼쪽 변수에 대입한다
+            outStr += "\n";
         }
-        System.out.println(outstr);
+        System.out.println(outStr);
         try {
             FileOutputStream outputStream =
                     new FileOutputStream("./src/day25/boardService9mvc/data.txt");
-            outputStream.write(outstr.getBytes());
+            outputStream.write(outStr.getBytes());
             System.out.println("[파일 저장 성공]");
 
-        } catch (FileNotFoundException e) {e.printStackTrace();
-        } catch (IOException e) {e.printStackTrace();}
+        } catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
     }
 
     // ================= 영구저장 된 파일의 게시물들을 가져오는 기능 ================//
-    public void fileLoad(){
+    public void fileLoad(){ // 프로그램이 실행 되었을때 한번만(Dao 객체(싱글톤) 생성될때)
         try {
             FileInputStream inputStream =
                     new FileInputStream("./src/day25/boardService9mvc/data.txt");
@@ -78,6 +88,24 @@ public class BoardDao {
             inputStream.read(bytes);
             String inStr = new String(bytes);
             // 활용 과제 : 파일로 부터 읽어온 문자열의 게시물 정보들을 boarDd에 저장하시오.
+            // [1] 문자열 분해, "문자열.split("기준문자")
+            // 객체구분문자(inStr.split("\n")) , 필드구분문자(inStr.split(",")
+            String[] objStr = inStr.split("\n");
+            for (int i = 0; i <= objStr.length-1; i++){
+                String obj = objStr[i]; // 1개의 객체 필드 값들 가져오기
+                // objStr = ["안녕하세요,유재석,1234" "..."]
+                // objStr[0] = "안녕하세요,유재석,1234"
+                // objStr[0].split(",") --> ["안녕하세요","유재석","1234"]
+                // field = ["안녕하세요","유재석","1234"]
+                // field[0] = "안녕하세요"
+                String[] field = obj.split(",");
+                String content = field[0];
+                String writer = field[1];
+                int pwd = Integer.parseInt(field[2]);
+                BoardDto boardDto = new BoardDto(content,writer,pwd);
+                boardDB.add(boardDto);
+            }
+
         } catch (FileNotFoundException e) {e.printStackTrace();
         } catch (IOException e) {e.printStackTrace();}
     }
