@@ -1,0 +1,72 @@
+package day30.boardService8mvc.view;
+
+import day30.boardService8mvc.controller.UserController;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class UserView {
+    public BoardView bv = BoardView.getInstance();
+
+    static Scanner scan =  new Scanner(System.in);
+
+    public void mainPage() throws SQLException {
+        while (true) {
+            System.out.println("---- 메뉴 ----");
+            System.out.println("1.회원가입 2.로그인");
+            int choose = 0;
+            try {
+                choose = scan.nextInt();
+            } catch (Exception e) {
+                System.out.println("숫자만 입력하세요.");
+                scan.nextLine();
+                continue;
+            }
+            switch (choose) {
+                case 1:
+                    signUP();
+                    break;
+
+                case 2:
+                    logIn();
+                    bv.mainPage();
+                    break;
+
+                default:
+                    return;
+            }
+        }
+    }
+
+    private static UserView userView = new UserView();
+    private UserView(){}
+    public static UserView getInstance(){
+        return userView;
+    }
+
+    public void signUP() {
+        while (true) {
+
+            System.out.println("등록할 ID: ");
+            String id = scan.next();
+
+            if (UserController.getInstance().checkId(id)) {
+                System.out.println("이미 등록된 ID 입니다.");
+                continue;
+            }
+
+            System.out.println("등록할 PWD: ");
+            String pwd = scan.next();
+            System.out.println("등록할 Name: ");
+            String name = scan.next();
+            UserController.getInstance().signUp(id, pwd, name);
+            System.out.println("회원가입이 완료 되었습니다.");
+            return;
+        }
+    }
+    public void logIn(){
+        System.out.println("ID: "); String id = scan.next();
+        System.out.println("PWD: "); String pwd = scan.next();
+        UserController.getInstance().logIn(id,pwd);
+    }
+}
